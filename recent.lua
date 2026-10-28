@@ -113,9 +113,11 @@ end
 
 function get_ext(path)
     if is_protocol(path) then
-        return path:match("^(%a[%w.+-]-)://"):upper()
+        local scheme = path:match("^(%a[%w.+-]-)://")
+        return scheme and scheme:upper() or ""
     else
-        return path:match(".+%.(%w+)$"):upper()
+        local ext = path:match(".+%.(%w+)$")
+        return ext and ext:upper() or ""
     end
 end
 
